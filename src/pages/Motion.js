@@ -1,9 +1,32 @@
 import CardTemplate from "../Templates/CardTemplate";
+import {useEffect, useState} from "react";
 
 function Motion() {
+    const [max, setMax] = useState(null);
+
+    const getMax = () => {
+        const requestOptions = {
+            method: "GET",
+        };
+
+        fetch("http://localhost:3030/motion?_sort=date&detected=1&_order=desc&_limit=1", requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                setMax(new Date(result[0].date).toLocaleString(
+                    [],
+                    {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})
+                )
+            })
+            .catch((error) => console.log("error", error));
+    };
+
+    useEffect(() => {
+        getMax();
+    }, []);
+
     return (
-        <div className="container mx-auto bg-gray-200 rounded-xl shadow border p-8">
-            <CardTemplate sensor={"motion"}/>
+        <div className="container mx-auto bg-gray-100 rounded-xl shadow border p-8">
+            <CardTemplate sensor={"motion"} max={max}/>
         </div>
     );
 }
