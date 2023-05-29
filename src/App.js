@@ -1,24 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
+import Light from "./pages/Light";
+import Temperature from "./pages/Temperature";
+import Motion from "./pages/Motion";
+import Pressure from "./pages/Pressure";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="px-16 py-16 grid grid-cols-2 gap-4 h-screen">
+          <Temperature/>
+          <Light/>
+          <Motion/>
+          <Pressure/>
+      </div>
   );
 }
 
