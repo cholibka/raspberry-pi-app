@@ -1,5 +1,6 @@
 import CardTemplate from "../Templates/CardTemplate";
 import {useEffect, useState} from "react";
+import {BACKEND_SERVICE_URL} from "../constants";
 
 function Pressure() {
     const [min, setMin] = useState(null);
@@ -9,7 +10,7 @@ function Pressure() {
             method: "GET",
         };
 
-        fetch("http://localhost:3030/pressure?_sort=Pa&_order=asc&_limit=1", requestOptions)
+        fetch(BACKEND_SERVICE_URL + "pressure?_sort=Pa&_order=asc&_limit=1", requestOptions)
             .then((response) => response.json())
             .then((result) => {
                 setMin(result[0].Pa + " hPa")
@@ -22,7 +23,7 @@ function Pressure() {
             method: "GET",
         };
 
-        fetch("http://localhost:3030/pressure?_sort=Pa&_order=desc&_limit=1", requestOptions)
+        fetch(BACKEND_SERVICE_URL + "pressure?_sort=Pa&_order=desc&_limit=1", requestOptions)
             .then((response) => response.json())
             .then((result) => {
                 setMax(result[0].Pa + " hPa")

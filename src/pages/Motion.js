@@ -1,5 +1,6 @@
 import CardTemplate from "../Templates/CardTemplate";
 import {useEffect, useState} from "react";
+import {BACKEND_SERVICE_URL} from "../constants";
 
 function Motion() {
     const [max, setMax] = useState(null);
@@ -9,7 +10,7 @@ function Motion() {
             method: "GET",
         };
 
-        fetch("http://localhost:3030/motion?_sort=date&detected=1&_order=desc&_limit=1", requestOptions)
+        fetch(BACKEND_SERVICE_URL + "motion?_sort=date&detected=1&_order=desc&_limit=1", requestOptions)
             .then((response) => response.json())
             .then((result) => {
                 setMax(new Date(result[0].date).toLocaleString(

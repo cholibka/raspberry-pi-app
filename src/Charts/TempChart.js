@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import CustomizedAxisTick from "./CustomizedAxisTick";
+import {BACKEND_SERVICE_URL} from "../constants";
 
 function TempChart() {
     const [data, setData] = useState([]);
@@ -10,7 +11,7 @@ function TempChart() {
             method: "GET",
         };
 
-        fetch("http://localhost:3030/temperature", requestOptions)
+        fetch(BACKEND_SERVICE_URL + "temperature", requestOptions)
             .then((response) => response.json())
             .then((result) => {
                 result.forEach(element => {

@@ -1,5 +1,6 @@
 import CardTemplate from "../Templates/CardTemplate";
 import {useEffect, useState} from "react";
+import {BACKEND_SERVICE_URL} from "../constants";
 
 function Temperature() {
     const [min, setMin] = useState(null);
@@ -9,7 +10,7 @@ function Temperature() {
             method: "GET",
         };
 
-        fetch("http://localhost:3030/temperature?_sort=temp&_order=asc&_limit=1", requestOptions)
+        fetch(BACKEND_SERVICE_URL + "temperature?_sort=temp&_order=asc&_limit=1", requestOptions)
             .then((response) => response.json())
             .then((result) => {
                 setMin(result[0].temp + " °C")
@@ -22,7 +23,7 @@ function Temperature() {
             method: "GET",
         };
 
-        fetch("http://localhost:3030/temperature?_sort=temp&_order=desc&_limit=1", requestOptions)
+        fetch(BACKEND_SERVICE_URL + "temperature?_sort=temp&_order=desc&_limit=1", requestOptions)
             .then((response) => response.json())
             .then((result) => {
                 setMax(result[0].temp + " °C")
