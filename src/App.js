@@ -1,17 +1,24 @@
 import './App.css';
-import Light from "./pages/Light";
-import Temperature from "./pages/Temperature";
-import Motion from "./pages/Motion";
-import Pressure from "./pages/Pressure";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import MotionDetails from "./Pages/Details/MotionDetails";
+import TemperatureDetails from "./Pages/Details/TemperatureDetails";
+import PressureDetails from "./Pages/Details/PressureDetails";
+import LightDetails from "./Pages/Details/LightDetails";
+import Home from "./Pages/Home";
 
 function App() {
   return (
-      <div className="px-16 py-16 grid grid-cols-2 gap-4 h-screen">
-          <Temperature/>
-          <Light/>
-          <Motion/>
-          <Pressure/>
-      </div>
+      <>
+          <BrowserRouter>
+              <Routes>
+                  <Route path="/"  element={<Home/>}/>
+                  <Route path="/motion" element={<MotionDetails />} />
+                  <Route path="/temperature" element={<TemperatureDetails />} />
+                  <Route path="/pressure" element={<PressureDetails />} />
+                  <Route path="/light" element={<LightDetails />} />
+              </Routes>
+          </BrowserRouter>
+      </>
   );
 }
 

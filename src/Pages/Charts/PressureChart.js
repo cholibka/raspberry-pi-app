@@ -1,32 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import CustomizedAxisTick from "./CustomizedAxisTick";
-import {BACKEND_SERVICE_URL} from "../constants";
+import {mainViewChart} from "../../helpers/functions";
+import {SENSORS} from "../../constants";
 
 function PressureChart() {
     const [data, setData] = useState([]);
 
-    const getData = () => {
-        const requestOptions = {
-            method: "GET",
-        };
-
-        fetch(BACKEND_SERVICE_URL + "pressure", requestOptions)
-            .then((response) => response.json())
-            .then((result) => {
-                result.forEach(element => {
-                    element.date = new Date(element.date).toLocaleString(
-                        [],
-                        {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})
-                });
-                setData(result)
-
-            })
-            .catch((error) => console.log("error", error));
-    };
-
     useEffect(() => {
-        getData();
+        mainViewChart(SENSORS["P"])
+            .then(r => setData(r))
     }, []);
 
     return (
@@ -50,7 +33,7 @@ function PressureChart() {
                        }}
                 />
                 <Tooltip />
-                <Line type="natural" dataKey="Pa" stroke="#EC4899" activeDot={{ r: 8 }} unit=" hPa" name="pressure"/>
+                <Line type="natural" dataKey="Pa" stroke="#EC4899" activeDot={{ r: 8 }} unit=" hPa" name={SENSORS["P"]}/>
             </LineChart>
         </ResponsiveContainer>
     )
