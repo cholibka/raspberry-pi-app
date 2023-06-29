@@ -17,9 +17,7 @@ function Pressure() {
 
 
     return (
-        <div className="container mx-auto bg-gray-100 rounded-xl shadow border p-8">
-           <CardTemplate sensor={SENSORS["P"]} min={min} max={max}/>
-        </div>
+        <CardTemplate sensor={SENSORS["P"]} min={min} max={max}/>
     );
 }
 

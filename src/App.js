@@ -5,13 +5,15 @@ import TemperatureDetails from "./Pages/Details/TemperatureDetails";
 import PressureDetails from "./Pages/Details/PressureDetails";
 import LightDetails from "./Pages/Details/LightDetails";
 import Home from "./Pages/Home";
+import Switcher from "./themes/Switcher";
 
 function App() {
   return (
       <>
+          <Switcher/>
           <BrowserRouter>
               <Routes>
-                  <Route path="/"  element={<Home/>}/>
+                  <Route path="/" element={<Home/>}/>
                   <Route path="/motion" element={<MotionDetails />} />
                   <Route path="/temperature" element={<TemperatureDetails />} />
                   <Route path="/pressure" element={<PressureDetails />} />

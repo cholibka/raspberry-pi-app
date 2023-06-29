@@ -6,7 +6,7 @@ import Pressure from "./MainView/Pressure";
 function Home() {
     return (
         <>
-            <div className="px-16 py-16 grid grid-cols-2 gap-4 h-screen">
+            <div className="px-16 py-16 grid grid-cols-2 gap-4 h-screen bg-white dark:bg-slate-800">
                 <Temperature/>
                 <Light/>
                 <Motion/>
