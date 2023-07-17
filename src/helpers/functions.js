@@ -10,7 +10,6 @@ const sortValue = (sensor) => {
 
 export const mainViewChart = async(sensor, date) => {
     let arr = []
-
     await fetch(BACKEND_SERVICE_URL + sensor, requestOptionsGet)
         .then((response) => response.json())
         .then((result) => {
@@ -26,20 +25,25 @@ export const mainViewChart = async(sensor, date) => {
     if(date == null) {
         date = new Date().toLocaleString(
             [],
-            {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})
+            {year: 'numeric', month: 'numeric', day: 'numeric'})
     }
-
-    let dateTo = new Date(new Date().setDate(new Date().getDate() + 7)).toLocaleString(
-        [],
-        {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})
-
+    else
+        date = new Date(date.startDate).toLocaleString(
+            [],
+            {year: 'numeric', month: 'numeric', day: 'numeric'})
 
     let newArr = []
 
+
     arr.forEach(x => {
-        if(x.date.split(',')[0] >= date.split(',')[0] && x.date.split(',')[0] <= dateTo.split(',')[0])
+        if(x.date.split(',')[0] === date)
             newArr.push(x)
     })
+
+
+    // console.log(newArr)
+    // if(newArr.length === 0)
+    //    newArr = [{date: ''}, {date: ''}, {date: ''}]
 
     return newArr;
 }

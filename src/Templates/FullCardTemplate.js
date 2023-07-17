@@ -1,5 +1,4 @@
 import {Link} from "react-router-dom";
-import {SENSORS} from "../constants";
 import Datepicker from "react-tailwindcss-datepicker";
 import {useState} from "react";
 import CustomChart from "../Pages/Charts/CustomChart";
@@ -10,13 +9,12 @@ function FullCardTemplate({sensor}) {
     };
 
     const [value, setValue] = useState({
-        startDate: null,
-        endDate: null
+        startDate: new Date(),
+        endDate: new Date()
     });
 
     const handleValueChange = (newValue) => {
-        console.log("newValue:", newValue);
-        setValue(newValue);
+        setValue(newValue)
     }
 
     return (
@@ -27,42 +25,18 @@ function FullCardTemplate({sensor}) {
                 </p>
 
 
-                <div className="grid grid-cols-2 w-full h-full">
-                    {(sensor === SENSORS["T"] || sensor === SENSORS["P"]) &&
-                        <>
-                            <div className="h-5/6 w-full">
-                                <Datepicker
-                                    primaryColor={"fuchsia"}
-                                    useRange={false}
-                                    asSingle={true}
-                                    value={value}
-                                    onChange={handleValueChange}
-                                />
-                               <CustomChart sensor={sensor}/>
-                            </div>
-                            <div className="h-5/6 w-full">
-                                <CustomChart sensor={sensor}/>
-                            </div>
-                        </>
-                    }
-
-                    {(sensor === SENSORS["L"] || sensor === SENSORS["M"]) &&
-                        <>
-                            <div className="h-5/6 w-full">
-                                <Datepicker
-                                    primaryColor={"fuchsia"}
-                                    useRange={false}
-                                    asSingle={true}
-                                    value={value}
-                                    onChange={handleValueChange}
-                                />
-                                <CustomChart sensor={sensor}/>
-                            </div>
-                            <div className="h-5/6 w-full">
-                                <CustomChart sensor={sensor}/>
-                            </div>
-                        </>
-                    }
+                <div className="w-full h-full">
+                    <div className="h-5/6 w-full">
+                        <Datepicker
+                            primaryColor={"fuchsia"}
+                            useRange={false}
+                            asSingle={true}
+                            value={value}
+                            onChange={handleValueChange}
+                            displayFormat={"DD.MM.YYYY"}
+                        />
+                       <CustomChart sensor={sensor} date={value}/>
+                    </div>
                 </div>
                     <Link to="/"
                           className="inline-flex items-center ml-2 text-sm font-medium text-fuchsia-600 md:ml-2 dark:text-fuchsia-500 hover:underline">
